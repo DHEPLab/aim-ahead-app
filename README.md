@@ -1,1 +1,1 @@
-# aim-ahead-frontend
+# aim-ahead-app
