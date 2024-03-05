@@ -29,15 +29,8 @@
     "prettier": "prettier src --write",
     "pre-push": "npm test -- --watchAll=false"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "bash .husky/commit-msg.sh",
-      "pre-commit": "npm run lint-staged",
-      "pre-push": "npm run pre-push"
-    }
-  },
   "lint-staged": {
-    "*.{js,ts,json,jsx,tsx,scss,css}": [
+    "src/**/*.{js,ts,json,jsx,tsx,scss,css}": [
       "eslint --fix",
       "prettier --write"
     ]
@@ -61,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "babel-preset-react-app": "^10.0.1",
     "cypress": "^13.6.6",
     "react-test-renderer": "^18.2.0",
     "sass": "^1.71.1"
