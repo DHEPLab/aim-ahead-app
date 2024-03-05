@@ -1,1 +1,1 @@
-# aim-ahead-app[]()
+# aim-ahead-app
