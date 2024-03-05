@@ -10,6 +10,9 @@
     "@types/node": "^16.18.86",
     "@types/react": "^18.2.62",
     "@types/react-dom": "^18.2.19",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -20,7 +23,24 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged",
+    "prettier": "prettier src --write",
+    "pre-push": "npm test"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "bash .husky/commit-msg.sh",
+      "pre-commit": "npm run lint-staged",
+      "pre-push": "npm run pre-push"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,json,jsx,tsx,scss,css}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "eslintConfig": {
     "extends": [
