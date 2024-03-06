@@ -1,9 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import ExamplePage from "./index";
+import ExampleHomePage from "./index";
+import { BrowserRouter } from "react-router-dom";
 
 test("renders example page", () => {
-  render(<ExamplePage />);
-  const linkElement = screen.getByText(/and save to reload/i);
+  render(
+    <BrowserRouter>
+      <ExampleHomePage />
+    </BrowserRouter>,
+  );
+  const linkElement = screen.getByText(/Go to User Page/i);
   expect(linkElement).toBeInTheDocument();
 });
