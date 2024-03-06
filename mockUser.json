@@ -1,0 +1,11 @@
+{
+  "user": {
+    "id": 1001,
+    "name": "David",
+    "email": "david@hotmail.com",
+    "title": "Mr.",
+    "admin_flag": "user.admin_flag",
+    "created_timestamp": "user.created_timestamp",
+    "modified_timestamp": "user.modified_timestamp"
+  }
+}
