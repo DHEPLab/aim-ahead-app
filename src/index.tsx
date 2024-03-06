@@ -2,14 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
-import ExamplePage from "./pages/ExamplePage";
+import { BrowserRouter, useRoutes } from "react-router-dom";
+import { routes } from "./routes";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+
+function App() {
+  return useRoutes(routes);
+}
+
 root.render(
   <React.StrictMode>
-    <ExamplePage />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 );
 
