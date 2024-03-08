@@ -3,8 +3,15 @@ import styles from "./index.module.scss";
 import logo from "../../assets/images/logo.svg";
 import ExampleComponent from "../../components/ExampleComponent";
 import { useNavigate } from "react-router-dom";
-import { useGetUserDetail } from "../../services/useUserService";
-import { useMount } from "ahooks";
+import { useMount, useRequest } from "ahooks";
+import { getUserDetail } from "../../services/useUserService";
+
+const useGetUserDetail = () => {
+  const { loading, runAsync, data } = useRequest(getUserDetail, {
+    manual: true,
+  });
+  return { loading, getUserDetail: runAsync, user: data?.data };
+};
 
 const ExampleUserPage = () => {
   const navigate = useNavigate();
