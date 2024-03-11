@@ -1,3 +1,4 @@
+import React from "react";
 import ExampleHomePage from "../pages/ExampleHomePage";
 import ExampleUserPage from "../pages/ExampleUserPage";
 

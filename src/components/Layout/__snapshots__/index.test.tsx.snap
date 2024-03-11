@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Layout on variable media point view port: should on PC view port 1`] = `
+<div>
+  <div
+    class="mainLayout"
+    data-testid="aim-ahead-layout"
+    id="aim-ahead-layout"
+  />
+</div>
+`;
+
+exports[`Test Layout on variable media point view port: should on mobile view port 1`] = `
+<div>
+  <div
+    class="mainLayout"
+    data-testid="aim-ahead-layout"
+    id="aim-ahead-layout"
+  />
+</div>
+`;
