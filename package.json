@@ -30,7 +30,7 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "prettier": "prettier src --write",
-    "pre-push": "npm test -- --watchAll=false",
+    "pre-push": "npm test -- --watchAll=false && npx cypress run",
     "mock-server": "json-server --watch mockUser.json --port 4000"
   },
   "lint-staged": {
