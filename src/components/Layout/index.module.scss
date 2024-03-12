@@ -1,10 +1,9 @@
 $mobile-point: 576px;
 
 .mainLayout {
-  // @media screen and (min-width: $mobile-point) {
+  @media screen and (min-width: $mobile-point) {
     max-width: $mobile-point;
     margin: 0 auto;
-
-  // }
+  }
 }
 
