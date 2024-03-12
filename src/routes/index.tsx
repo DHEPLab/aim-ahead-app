@@ -1,11 +1,11 @@
 import React from "react";
-import ExampleHomePage from "../pages/ExampleHomePage";
+import Home from "../pages/Home";
 import ExampleUserPage from "../pages/ExampleUserPage";
 
 const routes = [
   {
     path: "/",
-    element: <ExampleHomePage />,
+    element: <Home />,
   },
   {
     path: "/user",
