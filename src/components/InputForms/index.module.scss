@@ -1,0 +1,36 @@
+.form {
+  width: 400px;
+  align-self: center;
+
+  .label {
+    font-size: 18px;
+  }
+
+  .input {
+    height: 40px;
+  }
+
+  .passwordRuleText {
+    color: gray;
+    margin-bottom: 50px;
+  }
+
+  .redirectText {
+    font-size: 18px;
+    text-decoration: underline;
+    color: black;
+  }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    .button {
+      height: 50px;
+      width: 200px;
+      font-size: 18px;
+    }
+  }
+}
