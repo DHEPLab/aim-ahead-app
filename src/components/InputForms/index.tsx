@@ -62,7 +62,7 @@ const InputForms = ({ type }: InputFormsProps) => {
       </a>
       <Form.Item className={styles.buttonContainer}>
         <Button className={styles.button} type="primary" shape="round" htmlType="submit">
-          {isSignUpPage ? "Login" : "Sign Up"}
+          {isSignUpPage ? "Sign Up" : "Login"}
         </Button>
       </Form.Item>
     </Form>
