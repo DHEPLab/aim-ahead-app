@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, useRoutes } from "react-router-dom";
+
+import reportWebVitals from "./reportWebVitals";
 import { routes } from "./routes";
-import Layout from "./components/Layout";
+
+import "./index.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -14,11 +15,9 @@ function App() {
 
 root.render(
   <React.StrictMode>
-    <Layout>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Layout>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 );
 

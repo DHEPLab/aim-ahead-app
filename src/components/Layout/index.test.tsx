@@ -34,3 +34,19 @@ describe("Test Layout on variable media point view port:", () => {
     // expect(layoutStyles.maxWidth).toBe("576px");
   });
 });
+
+describe("Test Layout pass in classname", () => {
+  it("Should have the default classname when no variables are passed in", () => {
+    render(<Layout />);
+
+    expect(screen.getByTestId("aim-ahead-layout").className).toBe("mainLayout");
+  });
+
+  it("Should receive classname when the variables are passed in", () => {
+    const classes = "appLayout";
+
+    render(<Layout className={classes} />);
+
+    expect(screen.getByTestId("aim-ahead-layout").className).toBe(`mainLayout ${classes}`);
+  });
+});

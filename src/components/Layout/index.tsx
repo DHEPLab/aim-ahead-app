@@ -1,17 +1,14 @@
 import React from "react";
+import classnames from "classnames";
 
-import Header from "./Header";
-import Footer from "./Footer";
 import testId from "../../utils/testId";
 
 import styles from "./index.module.scss";
 
-const Layout = (props: React.PropsWithChildren) => {
+const Layout = (props: React.PropsWithChildren<{ className?: string }>) => {
   return (
-    <div {...testId("aim-ahead-layout")} className={styles.mainLayout}>
-      <Header />
-      <div className={styles.container}>{props.children}</div>
-      <Footer />
+    <div {...testId("aim-ahead-layout")} className={classnames(styles.mainLayout, props.className)}>
+      {props.children}
     </div>
   );
 };
