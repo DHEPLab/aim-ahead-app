@@ -1,6 +1,6 @@
 import React from "react";
 
-import InputForms, { FormType } from "../../components/InputForms";
+import AuthenticationForm, { FormType } from "../../components/AuthenticationForm";
 import Layout from "../../components/Layout";
 
 import styles from "./index.module.scss";
@@ -12,7 +12,7 @@ const LoginPage = () => {
         <div className={styles.logoContainer}>
           <div className={styles.logo} />
         </div>
-        <InputForms type={FormType.Login} />
+        <AuthenticationForm type={FormType.Login} />
       </div>
     </Layout>
   );
