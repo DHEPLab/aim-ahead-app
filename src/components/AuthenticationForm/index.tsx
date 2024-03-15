@@ -43,8 +43,12 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <FormControl sx={{ width: "100%" }}>
-        <span className={styles.inputLabel}>Email</span>
+        <label className={styles.inputLabel} htmlFor="email" data-testid="email-label">
+          Email
+        </label>
         <OutlinedInput
+          id="email"
+          inputProps={{ "data-testid": "email-input" }}
           required
           error={false}
           value={email}
@@ -54,9 +58,12 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
         />
       </FormControl>
       <FormControl sx={{ width: "100%" }}>
-        <span className={styles.inputLabel}>Password</span>
+        <label className={styles.inputLabel} htmlFor="password-input" data-testid="password-label">
+          Password
+        </label>
         <OutlinedInput
-          id="outlined-adornment-password"
+          id="password-input"
+          inputProps={{ "data-testid": "password-input" }}
           value={password}
           type={showPassword ? "text" : "password"}
           onChange={handlePasswordChange}
