@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material";
+import { Button, FormControl, IconButton, InputAdornment, OutlinedInput } from "@mui/material";
 
 import styles from "./index.module.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -42,25 +42,26 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <TextField
-        label="Email"
-        required
-        error={false}
-        value={email}
-        className={styles.input}
-        onChange={handleEmailChange}
-        placeholder="Enter Email"
-      />
       <FormControl sx={{ width: "100%" }}>
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <span className={styles.inputLabel}>Email</span>
         <OutlinedInput
-          label="Password"
+          required
+          error={false}
+          value={email}
+          className={styles.input}
+          onChange={handleEmailChange}
+          placeholder="Enter Email"
+        />
+      </FormControl>
+      <FormControl sx={{ width: "100%" }}>
+        <span className={styles.inputLabel}>Password</span>
+        <OutlinedInput
           id="outlined-adornment-password"
           value={password}
           type={showPassword ? "text" : "password"}
           onChange={handlePasswordChange}
           required
-          sx={isSignUpPage ? {} : { marginBottom: 80 }}
+          sx={isSignUpPage ? {} : { marginBottom: "100px" }}
           placeholder="Enter Password"
           endAdornment={
             <InputAdornment position="end">
