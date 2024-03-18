@@ -70,10 +70,12 @@ jobs:
           docker build -t $IMAGE_URI:$IMAGE_TAG .
           docker push $IMAGE_URI:$IMAGE_TAG
 
-#      - name: Deploy to Amazon ECS
-#        run: |
-#          # 使用 AWS CLI 或 Amazon ECS 的部署脚本更新 ECS 服务
-#          # 这需要您已经有一个运行的 ECS 服务和任务定义
-#          aws ecs update-service --cluster your-cluster-name --service your-service-name --force-new-deployment
-#        env:
-#          AWS_REGION: us-east-1
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Amazon ECS
+        run: |
+          aws ecs update-service --cluster aim-ahead-cluster-dev --service aim-ahead-app-service-dev --force-new-deployment
+        env:
+          AWS_REGION: us-east-1
