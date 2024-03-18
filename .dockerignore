@@ -1,0 +1,7 @@
+.github
+
+cypress
+cypress.config.ts
+
+.prettier*
+.stylelint*
