@@ -7,7 +7,7 @@ import axios from "axios";
 
 const mock = new MockAdapter(axios);
 
-mock.onGet("http://localhost:4000/user").reply(200, {
+mock.onGet("/api/user").reply(200, {
   id: 1001,
   name: "David",
   email: "david@hotmail.com",
