@@ -2,6 +2,18 @@ import type { AxiosPromise, AxiosRequestConfig } from "axios";
 import axios from "axios";
 
 const baseUrl = "/api";
+const tokenKey = "token";
+const storeToken = (token: string) => {
+  localStorage.setItem(tokenKey, token);
+};
+
+const getToken = () => {
+  return localStorage.getItem(tokenKey) || "";
+};
+
+const hasTokenChanged = (newToken: string) => {
+  return getToken() !== newToken;
+};
 
 export async function requestWithPrefix<T>(
   url: string,
@@ -26,7 +38,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = "Bearer " + localStorage.getItem("token");
+    config.headers.Authorization = "Bearer " + getToken();
     return config;
   },
   (error) => {
@@ -36,6 +48,10 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
+    const newToken = response.headers["Authorization"];
+    if (newToken && hasTokenChanged(newToken.split(" ")[1])) {
+      storeToken(newToken.split(" ")[1]);
+    }
     return response;
   },
   (error) => {
