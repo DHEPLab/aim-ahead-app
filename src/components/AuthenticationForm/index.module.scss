@@ -12,7 +12,6 @@
     width: 100%;
 
     .emailInput {
-      margin-bottom: 20px;
       border-radius: 8px;
       color: #676A6A;
       font-family: Montserrat, serif;
@@ -22,6 +21,13 @@
       border-radius: 8px;
       color: #676A6A;
       font-family: Montserrat, serif;
+    }
+
+    .invalidEmailText {
+      color: red;
+      font-family: Montserrat, serif;
+      font-size: 16px;
+      height: 20px;
     }
   }
 

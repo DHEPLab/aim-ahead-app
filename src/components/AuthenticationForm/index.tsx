@@ -15,6 +15,7 @@ export enum FormType {
 
 const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const isSignUpPage = type === FormType.SignUp;
@@ -29,9 +30,16 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    validateEmail();
     // 处理登录逻辑
     console.log("Email:", email);
     console.log("Password:", password);
+  };
+
+  const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(email);
+    setIsEmailValid(isValidEmail);
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -50,12 +58,16 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
           id="email"
           inputProps={{ "data-testid": "email-input" }}
           required
-          error={false}
+          error={!isEmailValid}
           value={email}
           className={styles.emailInput}
+          sx={isEmailValid ? { marginBottom: "20px" } : {}}
           onChange={handleEmailChange}
           placeholder="Enter Email"
         />
+        {!isEmailValid && (
+          <span className={styles.invalidEmailText}>Invalid email address. Please correct and try again.</span>
+        )}
       </FormControl>
       <FormControl className={styles.formController}>
         <label className={styles.inputLabel} htmlFor="password-input" data-testid="password-label">
