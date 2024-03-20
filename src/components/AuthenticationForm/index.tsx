@@ -76,10 +76,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
           <span className={styles.invalidEmailText}>Invalid email address. Please correct and try again.</span>
         )}
       </FormControl>
-      <FormControl
-        className={styles.formController}
-        sx={isSignUpPage ? { marginBottom: "10px" } : { marginBottom: "60px" }}
-      >
+      <FormControl className={styles.formController} sx={{ marginBottom: "30px" }}>
         <label className={styles.inputLabel} htmlFor="password-input" data-testid="password-label">
           Password
         </label>

@@ -17,8 +17,8 @@ const LoginPage = () => {
   return (
     <Layout>
       <div className={styles.app}>
-        <div className={styles.logoContainer}>
-          <div className={styles.logo} />
+        <div className={styles.titleContainer}>
+          <span className={styles.title}>Login</span>
         </div>
         <AuthenticationForm pageType={FormType.Login} handelSubmit={handleLogin} passwordRegex={passwordRegex} />
       </div>
