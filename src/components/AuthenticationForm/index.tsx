@@ -42,7 +42,7 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <FormControl sx={{ width: "100%" }}>
+      <FormControl className={styles.formController}>
         <label className={styles.inputLabel} htmlFor="email" data-testid="email-label">
           Email
         </label>
@@ -52,12 +52,12 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
           required
           error={false}
           value={email}
-          className={styles.input}
+          className={styles.emailInput}
           onChange={handleEmailChange}
           placeholder="Enter Email"
         />
       </FormControl>
-      <FormControl sx={{ width: "100%" }}>
+      <FormControl className={styles.formController}>
         <label className={styles.inputLabel} htmlFor="password-input" data-testid="password-label">
           Password
         </label>
@@ -68,6 +68,7 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
           type={showPassword ? "text" : "password"}
           onChange={handlePasswordChange}
           required
+          className={styles.passwordInput}
           sx={isSignUpPage ? {} : { marginBottom: "100px" }}
           placeholder="Enter Password"
           endAdornment={
