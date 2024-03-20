@@ -85,7 +85,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
         </label>
         <OutlinedInput
           id="password-input"
-          inputProps={{ "data-testid": "password-input" }}
+          inputProps={{ "data-testid": "password-input", maxLength: 128 }}
           value={password}
           error={!isPasswordValid}
           type={showPassword ? "text" : "password"}

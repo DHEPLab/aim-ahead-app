@@ -6,7 +6,8 @@ import Layout from "../../components/Layout";
 import styles from "./index.module.scss";
 
 const SignUpPage = () => {
-  const passwordRegex = /^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/;
+  const passwordRegex = /^(?=.*[0-9!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,128}$/i;
+
   const handleSignUp = (email: string, password: string) => {
     console.log("email:" + email);
     console.log("password:" + password);
