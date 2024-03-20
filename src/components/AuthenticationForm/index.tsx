@@ -78,7 +78,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
       </FormControl>
       <FormControl
         className={styles.formController}
-        sx={isSignUpPage && !isPasswordValid ? { marginBottom: "10px" } : { marginBottom: "50px" }}
+        sx={isSignUpPage ? { marginBottom: "10px" } : { marginBottom: "60px" }}
       >
         <label className={styles.inputLabel} htmlFor="password-input" data-testid="password-label">
           Password
@@ -106,9 +106,9 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
             </InputAdornment>
           }
         />
-        {isSignUpPage && !isPasswordValid && (
-          <span className={styles.passwordRuleText}>
-            Password should be 8-12 characters and at least include one special character
+        {isSignUpPage && (
+          <span className={isPasswordValid ? styles.passwordRuleText : styles.invalidPasswordText}>
+            Password should be 8-128 characters and at least include one special character
           </span>
         )}
       </FormControl>
