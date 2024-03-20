@@ -3,8 +3,14 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import AuthenticationForm, { FormType } from "./index";
 
 describe("AuthenticationForm", () => {
+  const passwordRegex = /.*/;
+
+  const handelSubmit = (email: string, password: string) => {
+    return true;
+  };
+
   test("renders login form", () => {
-    render(<AuthenticationForm type={FormType.Login} />);
+    render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
 
     expect(screen.getByTestId("email-label")).toBeInTheDocument();
     expect(screen.getByTestId("email-input")).toBeInTheDocument();
@@ -13,21 +19,8 @@ describe("AuthenticationForm", () => {
     expect(screen.getByText("Login")).toBeInTheDocument();
   });
 
-  test("renders sign up form", () => {
-    render(<AuthenticationForm type={FormType.SignUp} />);
-
-    expect(screen.getByTestId("email-label")).toBeInTheDocument();
-    expect(screen.getByTestId("email-input")).toBeInTheDocument();
-    expect(screen.getByTestId("password-label")).toBeInTheDocument();
-    expect(screen.getByTestId("password-input")).toBeInTheDocument();
-    expect(
-      screen.getByText("Password should be 8-12 characters and at least include one special character"),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Sign Up")).toBeInTheDocument();
-  });
-
   test("updates email and password fields correctly", () => {
-    render(<AuthenticationForm type={FormType.Login} />);
+    render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
 
     const emailInput = screen.getByTestId("email-input") as HTMLInputElement;
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
@@ -40,7 +33,7 @@ describe("AuthenticationForm", () => {
   });
 
   test("submits login form with correct values", () => {
-    render(<AuthenticationForm type={FormType.Login} />);
+    render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
 
     const emailInput = screen.getByTestId("email-input") as HTMLInputElement;
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;

@@ -5,7 +5,9 @@ import styles from "./index.module.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface AuthenticationFormProps {
-  type: FormType;
+  pageType: FormType;
+  passwordRegex: RegExp;
+  handelSubmit: (email: string, password: string) => boolean;
 }
 
 export enum FormType {
@@ -13,33 +15,38 @@ export enum FormType {
   SignUp,
 }
 
-const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
-  const [showPassword, setShowPassword] = React.useState(false);
+const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: AuthenticationFormProps) => {
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const isSignUpPage = type === FormType.SignUp;
+  const isSignUpPage = pageType === FormType.SignUp;
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
+    setIsEmailValid(true);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
+    setIsPasswordValid(true);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const validateAndSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     validateEmail();
-    // 处理登录逻辑
-    console.log("Email:", email);
-    console.log("Password:", password);
+    validatePassword();
+    handelSubmit(email, password);
   };
 
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValidEmail = emailRegex.test(email);
-    setIsEmailValid(isValidEmail);
+    setIsEmailValid(emailRegex.test(email));
+  };
+
+  const validatePassword = () => {
+    setIsPasswordValid(passwordRegex.test(password));
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -49,7 +56,7 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={validateAndSubmit}>
       <FormControl className={styles.formController}>
         <label className={styles.inputLabel} htmlFor="email" data-testid="email-label">
           Email
@@ -69,7 +76,10 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
           <span className={styles.invalidEmailText}>Invalid email address. Please correct and try again.</span>
         )}
       </FormControl>
-      <FormControl className={styles.formController}>
+      <FormControl
+        className={styles.formController}
+        sx={isSignUpPage && !isPasswordValid ? { marginBottom: "10px" } : { marginBottom: "50px" }}
+      >
         <label className={styles.inputLabel} htmlFor="password-input" data-testid="password-label">
           Password
         </label>
@@ -77,11 +87,11 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
           id="password-input"
           inputProps={{ "data-testid": "password-input" }}
           value={password}
+          error={!isPasswordValid}
           type={showPassword ? "text" : "password"}
           onChange={handlePasswordChange}
           required
           className={styles.passwordInput}
-          sx={isSignUpPage ? {} : { marginBottom: "100px" }}
           placeholder="Enter Password"
           endAdornment={
             <InputAdornment position="end">
@@ -96,17 +106,18 @@ const AuthenticationForm = ({ type }: AuthenticationFormProps) => {
             </InputAdornment>
           }
         />
+        {isSignUpPage && !isPasswordValid && (
+          <span className={styles.passwordRuleText}>
+            Password should be 8-12 characters and at least include one special character
+          </span>
+        )}
       </FormControl>
-      {isSignUpPage && (
-        <p className={styles.passwordRuleText}>
-          Password should be 8-12 characters and at least include one special character
-        </p>
-      )}
-      <a className={styles.redirectText} href={type === FormType.SignUp ? "/login" : "/signup"}>
+
+      <a className={styles.redirectText} href={pageType === FormType.SignUp ? "/login" : "/signup"}>
         {isSignUpPage ? "Go Login>>" : "Go Sign Up>>"}
       </a>
       <div className={styles.buttonContainer}>
-        <Button className={styles.button} variant="contained" color="primary" type="submit">
+        <Button className={styles.button} variant="contained" type="submit" disabled={email === "" || password === ""}>
           {isSignUpPage ? "Sign Up" : "Login"}
         </Button>
       </div>
