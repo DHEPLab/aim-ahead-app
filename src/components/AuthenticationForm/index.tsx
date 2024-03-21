@@ -56,7 +56,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
   };
 
   return (
-    <form className={styles.form} onSubmit={validateAndSubmit}>
+    <form className={styles.form} onSubmit={validateAndSubmit} data-testid={"form"}>
       <FormControl className={styles.formController}>
         <label className={styles.inputLabel} htmlFor="email" data-testid="email-label">
           Email
