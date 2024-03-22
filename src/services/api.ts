@@ -11,22 +11,6 @@ const getToken = () => {
   return localStorage.getItem(tokenKey) || "";
 };
 
-export async function requestWithPrefix<T>(
-  url: string,
-  prefix: string,
-  config?: AxiosRequestConfig,
-): Promise<AxiosPromise<T>> {
-  return await axios({
-    url: `${prefix}${url}`,
-    ...config,
-  });
-}
-
-export async function request<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosPromise<T>> {
-  const response: Promise<AxiosPromise<T>> = requestWithPrefix(url, baseUrl, config);
-  return await response;
-}
-
 export const instance = axios.create({
   baseURL: baseUrl, // 设置基本的 API 地址
   timeout: 5000, // 设置请求超时时间
@@ -63,3 +47,19 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export async function requestWithPrefix<T>(
+  url: string,
+  prefix: string,
+  config?: AxiosRequestConfig,
+): Promise<AxiosPromise<T>> {
+  return await instance({
+    url: `${prefix}${url}`,
+    ...config,
+  });
+}
+
+export async function request<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosPromise<T>> {
+  const response: Promise<AxiosPromise<T>> = requestWithPrefix(url, baseUrl, config);
+  return await response;
+}
