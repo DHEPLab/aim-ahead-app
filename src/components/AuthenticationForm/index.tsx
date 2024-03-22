@@ -94,6 +94,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
             <InputAdornment position="end">
               <IconButton
                 aria-label="toggle password visibility"
+                data-testid="password-visibility-button"
                 onClick={handleClickShowPassword}
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
@@ -110,11 +111,21 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
         )}
       </FormControl>
 
-      <a className={styles.redirectText} href={pageType === FormType.SignUp ? "/login" : "/signup"}>
+      <a
+        className={styles.redirectText}
+        data-testid="redirect-label"
+        href={pageType === FormType.SignUp ? "/login" : "/signup"}
+      >
         {isSignUpPage ? "Go Login>>" : "Go Sign Up>>"}
       </a>
       <div className={styles.buttonContainer}>
-        <Button className={styles.button} variant="contained" type="submit" disabled={email === "" || password === ""}>
+        <Button
+          className={styles.button}
+          data-testid="button"
+          variant="contained"
+          type="submit"
+          disabled={email === "" || password === ""}
+        >
           {isSignUpPage ? "Sign Up" : "Login"}
         </Button>
       </div>

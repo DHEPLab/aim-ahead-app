@@ -12,11 +12,14 @@ describe("AuthenticationForm", () => {
   test("renders login form", () => {
     render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
 
+    expect(screen.getByText("Login")).toBeInTheDocument();
     expect(screen.getByTestId("email-label")).toBeInTheDocument();
     expect(screen.getByTestId("email-input")).toBeInTheDocument();
     expect(screen.getByTestId("password-label")).toBeInTheDocument();
     expect(screen.getByTestId("password-input")).toBeInTheDocument();
-    expect(screen.getByText("Login")).toBeInTheDocument();
+    expect(screen.getByTestId("redirect-label")).toBeInTheDocument();
+    expect(screen.getByTestId("password-visibility-button")).toBeInTheDocument();
+    expect(screen.getByTestId("button")).toBeInTheDocument();
   });
 
   test("updates email and password fields correctly", () => {
@@ -32,18 +35,41 @@ describe("AuthenticationForm", () => {
     expect(passwordInput.value).toBe("password123");
   });
 
-  test("submits login form with correct values", () => {
+  test("displays password in text format when showPassword is true", () => {
+    render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
+
+    const passwordInput = screen.getByTestId("password-input");
+    const passwordVisibilityButton = screen.getByTestId("password-visibility-button");
+
+    fireEvent.click(passwordVisibilityButton);
+
+    expect(passwordInput).toHaveAttribute("type", "text");
+  });
+
+  test("hides password in password format when showPassword is false", () => {
+    render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
+
+    const passwordInput = screen.getByTestId("password-input");
+    const passwordVisibilityButton = screen.getByTestId("password-visibility-button");
+
+    fireEvent.click(passwordVisibilityButton);
+    fireEvent.click(passwordVisibilityButton);
+
+    expect(passwordInput).toHaveAttribute("type", "password");
+  });
+
+  test("only enable button when email and password are inputted", () => {
     render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
 
     const emailInput = screen.getByTestId("email-input") as HTMLInputElement;
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
-    const loginButton = screen.getByText("Login");
+    const button = screen.getByTestId("button");
 
     fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    expect(button).toBeDisabled();
     fireEvent.change(passwordInput, { target: { value: "password123" } });
-    fireEvent.click(loginButton);
-
-    // Add assertions for the login logic, for example, check if the login logic function is called with the correct parameters
+    expect(button).not.toBeDisabled();
+    fireEvent.click(button);
   });
 
   test("displays error for invalid email", () => {
@@ -54,10 +80,13 @@ describe("AuthenticationForm", () => {
         handelSubmit={handelSubmit}
       />,
     );
-
+    const button = screen.getByTestId("button");
     const emailInput = screen.getByLabelText("Email");
+    const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
+
     fireEvent.change(emailInput, { target: { value: "invalidemail" } });
-    fireEvent.submit(screen.getByTestId("form"));
+    fireEvent.change(passwordInput, { target: { value: "invalidpassword" } });
+    fireEvent.click(button);
 
     expect(screen.getByText("Invalid email address. Please correct and try again.")).toBeInTheDocument();
   });
@@ -71,9 +100,13 @@ describe("AuthenticationForm", () => {
       />,
     );
 
-    const passwordInput = screen.getByLabelText("Password");
+    const button = screen.getByTestId("button");
+    const emailInput = screen.getByLabelText("Email");
+    const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
+
+    fireEvent.change(emailInput, { target: { value: "invalidemail" } });
     fireEvent.change(passwordInput, { target: { value: "invalidpassword" } });
-    fireEvent.submit(screen.getByTestId("form"));
+    fireEvent.click(button);
 
     expect(
       screen.getByText("Password should be 8-128 characters and at least include one special character"),
