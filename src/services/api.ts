@@ -11,10 +11,6 @@ const getToken = () => {
   return localStorage.getItem(tokenKey) || "";
 };
 
-const hasTokenChanged = (newToken: string) => {
-  return getToken() !== newToken;
-};
-
 export async function requestWithPrefix<T>(
   url: string,
   prefix: string,
@@ -49,7 +45,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     const newToken = response.headers["Authorization"];
-    if (newToken && hasTokenChanged(newToken.split(" ")[1])) {
+    if (newToken) {
       storeToken(newToken.split(" ")[1]);
     }
     return response;
