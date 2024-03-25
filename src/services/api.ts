@@ -41,7 +41,10 @@ instance.interceptors.response.use(
       } else if (error.response.status === 404) {
         console.log("Not found");
       } else if (error.response.status >= 500) {
-        console.log("Server error");
+        const bizError = error.response?.data?.error;
+        if (bizError) {
+          return Promise.reject(bizError);
+        }
       }
     }
     return Promise.reject(error);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormControl, IconButton, InputAdornment, OutlinedInput } from "@mui/material";
+import { Button, CircularProgress, FormControl, IconButton, InputAdornment, OutlinedInput } from "@mui/material";
 
 import styles from "./index.module.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -7,7 +7,9 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 interface AuthenticationFormProps {
   pageType: FormType;
   passwordRegex: RegExp;
-  handelSubmit: (email: string, password: string) => boolean;
+  handelSubmit: (email: string, password: string) => Promise<void>;
+  slot?: React.ReactNode;
+  onChange?: () => void;
 }
 
 export enum FormType {
@@ -15,38 +17,50 @@ export enum FormType {
   SignUp,
 }
 
-const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: AuthenticationFormProps) => {
+const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onChange }: AuthenticationFormProps) => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [submitLoading, setSubmitLoading] = useState(false);
+
   const isSignUpPage = pageType === FormType.SignUp;
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.();
     setEmail(event.target.value);
     setIsEmailValid(true);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.();
     setPassword(event.target.value);
     setIsPasswordValid(true);
   };
 
-  const validateAndSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const validateAndSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    validateEmail();
-    validatePassword();
-    handelSubmit(email, password);
+    if (validateEmail() && validatePassword()) {
+      setSubmitLoading(true);
+      try {
+        await handelSubmit(email, password);
+      } catch (e) {}
+      setSubmitLoading(false);
+    }
   };
 
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsEmailValid(emailRegex.test(email));
+    const isValid = emailRegex.test(email);
+    setIsEmailValid(isValid);
+    return isValid;
   };
 
   const validatePassword = () => {
-    setIsPasswordValid(passwordRegex.test(password));
+    const isValid = passwordRegex.test(password);
+    setIsPasswordValid(isValid);
+    return isValid;
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -104,13 +118,14 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
             </InputAdornment>
           }
         />
-        {isSignUpPage && (
+        {isSignUpPage && !isPasswordValid && (
           <span className={isPasswordValid ? styles.passwordRuleText : styles.invalidPasswordText}>
-            Password should be 8-128 characters and at least include one special character
+            Passwords must have at least 8 characters and contain at least a letter, a number and a symbol. Please try
+            again.
           </span>
         )}
       </FormControl>
-
+      {slot}
       <a
         className={styles.redirectText}
         data-testid="redirect-label"
@@ -126,7 +141,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit }: Authentic
           type="submit"
           disabled={email === "" || password === ""}
         >
-          {isSignUpPage ? "Sign Up" : "Login"}
+          {submitLoading ? <CircularProgress size={24} /> : isSignUpPage ? "Sign Up" : "Login"}
         </Button>
       </div>
     </form>

@@ -1,12 +1,12 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, act } from "@testing-library/react";
 import AuthenticationForm, { FormType } from "./index";
 
 describe("AuthenticationForm", () => {
   const passwordRegex = /.*/;
 
   const handelSubmit = (email: string, password: string) => {
-    return true;
+    return Promise.resolve();
   };
 
   test("renders login form", () => {
@@ -65,11 +65,22 @@ describe("AuthenticationForm", () => {
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
     const button = screen.getByTestId("button");
 
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    });
     expect(button).toBeDisabled();
-    fireEvent.change(passwordInput, { target: { value: "password123" } });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      fireEvent.change(passwordInput, { target: { value: "password123" } });
+    });
     expect(button).not.toBeDisabled();
-    fireEvent.click(button);
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      fireEvent.click(button);
+    });
   });
 
   test("displays error for invalid email", () => {
@@ -84,9 +95,12 @@ describe("AuthenticationForm", () => {
     const emailInput = screen.getByLabelText("Email");
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
 
-    fireEvent.change(emailInput, { target: { value: "invalidemail" } });
-    fireEvent.change(passwordInput, { target: { value: "invalidpassword" } });
-    fireEvent.click(button);
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      fireEvent.change(emailInput, { target: { value: "invalidemail" } });
+      fireEvent.change(passwordInput, { target: { value: "invalidpassword" } });
+      fireEvent.click(button);
+    });
 
     expect(screen.getByText("Invalid email address. Please correct and try again.")).toBeInTheDocument();
   });
@@ -96,7 +110,7 @@ describe("AuthenticationForm", () => {
       <AuthenticationForm
         pageType={FormType.SignUp}
         passwordRegex={/^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,128}$/}
-        handelSubmit={handelSubmit}
+        handelSubmit={() => Promise.reject()}
       />,
     );
 
@@ -104,12 +118,17 @@ describe("AuthenticationForm", () => {
     const emailInput = screen.getByLabelText("Email");
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
 
-    fireEvent.change(emailInput, { target: { value: "invalidemail" } });
-    fireEvent.change(passwordInput, { target: { value: "invalidpassword" } });
-    fireEvent.click(button);
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+      fireEvent.change(passwordInput, { target: { value: "invalidpassword" } });
+      fireEvent.click(button);
+    });
 
     expect(
-      screen.getByText("Password should be 8-128 characters and at least include one special character"),
+      screen.getByText(
+        "Passwords must have at least 8 characters and contain at least a letter, a number and a symbol. Please try again.",
+      ),
     ).toBeInTheDocument();
   });
 

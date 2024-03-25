@@ -8,7 +8,7 @@ import styles from "./index.module.scss";
 const handleLogin = (email: string, password: string) => {
   console.log("email:" + email);
   console.log("password:" + password);
-  return true;
+  return Promise.resolve();
   // handel api call here
 };
 
