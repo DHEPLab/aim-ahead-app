@@ -32,3 +32,20 @@ export const signup = (email: string, password: string): Promise<AxiosResponse<s
       return Promise.reject(error);
     });
 };
+
+export const login = (email: string, password: string): Promise<AxiosResponse<string>> => {
+  return instance
+    .post("/auth/login", {
+      email,
+      password,
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      if (error.code === "ERR_BAD_RESPONSE") {
+        error.message = "There is an unexpected error. Please check your internet and try again.";
+      }
+      return Promise.reject(error);
+    });
+};
