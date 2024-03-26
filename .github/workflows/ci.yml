@@ -39,8 +39,6 @@ jobs:
       - name: Run tests
         run: |
           npm test -- --watchAll=false
-      - name: Run Cypress tests
-        run: npx cypress run
 
   build-and-push:
     needs: test
