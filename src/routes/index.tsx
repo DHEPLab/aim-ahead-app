@@ -1,6 +1,7 @@
 import React from "react";
 import { RouteObject, Outlet } from "react-router-dom";
 
+import path from "./path";
 import Home from "../pages/Home";
 import ExampleUserPage from "../pages/ExampleUserPage";
 import LoginPage from "../pages/Login";
@@ -9,7 +10,7 @@ import AppLayout from "../components/AppLayout";
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: path.root,
     element: (
       <AppLayout>
         <Outlet />
@@ -17,7 +18,7 @@ const routes: RouteObject[] = [
     ),
     children: [
       {
-        path: "/home",
+        path: path.home,
         element: <Home />,
       },
       {
@@ -27,11 +28,11 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: "/login",
+    path: path.login,
     element: <LoginPage />,
   },
   {
-    path: "/signup",
+    path: path.signup,
     element: <SignUpPage />,
   },
 ];

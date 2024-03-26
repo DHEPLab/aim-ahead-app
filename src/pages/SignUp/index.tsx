@@ -5,6 +5,7 @@ import AuthenticationForm, { FormType } from "../../components/AuthenticationFor
 import Layout from "../../components/Layout";
 import { signup } from "../../services/useUserService";
 import { passwordPattern } from "../../utils/regexp";
+import path from "../../routes/path";
 
 import styles from "./index.module.scss";
 
@@ -15,7 +16,7 @@ const SignUpPage = () => {
   const handleSignUp = (email: string, password: string) =>
     signup(email, password)
       .then(() => {
-        nav("/login");
+        nav(path.login);
       })
       .catch((error) => {
         setSlot(<div className={styles.error}>{error.message}</div>);
