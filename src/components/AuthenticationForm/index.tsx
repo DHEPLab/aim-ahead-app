@@ -118,21 +118,13 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
             </InputAdornment>
           }
         />
-        {isSignUpPage && !isPasswordValid && (
+        {isSignUpPage && (
           <span className={isPasswordValid ? styles.passwordRuleText : styles.invalidPasswordText}>
-            Passwords must have at least 8 characters and contain at least a letter, a number and a symbol. Please try
-            again.
+            Passwords must have at least 8 characters and contain at least a letter, a number and a symbol.
           </span>
         )}
       </FormControl>
       {slot}
-      <a
-        className={styles.redirectText}
-        data-testid="redirect-label"
-        href={pageType === FormType.SignUp ? "/login" : "/signup"}
-      >
-        {isSignUpPage ? "Go Login>>" : "Go Sign Up>>"}
-      </a>
       <div className={styles.buttonContainer}>
         <Button
           className={styles.button}
@@ -143,6 +135,18 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
         >
           {submitLoading ? <CircularProgress size={24} /> : isSignUpPage ? "Sign Up" : "Login"}
         </Button>
+      </div>
+      <div className={styles.redirectTextContainer}>
+        <p className={styles.redirectHintText}>
+          {isSignUpPage ? "Already have an account?" : "Don’t have an account?"}
+        </p>
+        <a
+          className={styles.redirectText}
+          data-testid="redirect-label"
+          href={pageType === FormType.SignUp ? "/login" : "/signup"}
+        >
+          {isSignUpPage ? "Log In" : "Sign Up"}
+        </a>
       </div>
     </form>
   );

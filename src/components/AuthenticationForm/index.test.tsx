@@ -127,7 +127,7 @@ describe("AuthenticationForm", () => {
 
     expect(
       screen.getByText(
-        "Passwords must have at least 8 characters and contain at least a letter, a number and a symbol. Please try again.",
+        "Passwords must have at least 8 characters and contain at least a letter, a number and a symbol.",
       ),
     ).toBeInTheDocument();
   });

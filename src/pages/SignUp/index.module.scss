@@ -5,24 +5,48 @@
   flex-direction: column;
 
   .titleContainer {
-    width: 400px;
     margin-top: 60px;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
     align-self: center;
+    flex-direction: column;
+    display: flex;
+
+    .appLogo {
+      height: 90px;
+      width: 90px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      align-self: center;
+    }
 
     .title {
       font-size: 28px;
-      margin-bottom: 10px;
-      font-family: Montserrat, serif;
+      font-family: Lato, serif;
+      font-weight: bold;
+      align-self: center;
+    }
+
+    .subtitle {
+      width: 400px;
+      font-size: 17px;
+      font-family: Lato, serif;
+      color: #6e6d6d;
     }
   }
 }
 
-
-.error {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
+.errorContainer {
+  padding: 10px;
   border: 1px red solid;
-  border-radius: 8px;
   color: red;
+  background: #ffe0de;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+
+  .errorMessage {
+    margin-left: 10px;
+    font-family: Lato, serif;
+    align-self: center;
+  }
 }
