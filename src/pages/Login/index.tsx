@@ -6,6 +6,8 @@ import Layout from "../../components/Layout";
 import styles from "./index.module.scss";
 import { login } from "../../services/useUserService";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/images/aim_ahead_logo.jpg";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const LoginPage = () => {
   const nav = useNavigate();
@@ -18,7 +20,12 @@ const LoginPage = () => {
         nav("/");
       })
       .catch((error) => {
-        setSlot(<div className={styles.error}>{error.message}</div>);
+        setSlot(
+          <div className={styles.errorContainer}>
+            <ErrorOutlineIcon />
+            <span className={styles.errorMessage}>{error.message}</span>
+          </div>,
+        );
       });
 
   const handleFormchange = () => {
@@ -29,7 +36,12 @@ const LoginPage = () => {
     <Layout>
       <div className={styles.app}>
         <div className={styles.titleContainer}>
-          <span className={styles.title}>Login</span>
+          <img src={logo} className={styles.appLogo} alt="logo" />
+          <span className={styles.title}>Log In</span>
+          <p className={styles.subtitle}>
+            Welcome to participate in our AIM-AHEAD Clinical Decision Platform testing and shape the future of medical
+            decision-making.
+          </p>
         </div>
         <AuthenticationForm
           slot={slot}

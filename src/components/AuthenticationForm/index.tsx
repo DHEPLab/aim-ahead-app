@@ -133,7 +133,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
           type="submit"
           disabled={email === "" || password === ""}
         >
-          {submitLoading ? <CircularProgress size={24} /> : isSignUpPage ? "Sign Up" : "Login"}
+          {submitLoading ? <CircularProgress size={24} /> : isSignUpPage ? "Sign Up" : "Log In"}
         </Button>
       </div>
       <div className={styles.redirectTextContainer}>

@@ -12,7 +12,7 @@ describe("AuthenticationForm", () => {
   test("renders login form", () => {
     render(<AuthenticationForm pageType={FormType.Login} handelSubmit={handelSubmit} passwordRegex={passwordRegex} />);
 
-    expect(screen.getByText("Login")).toBeInTheDocument();
+    expect(screen.getByText("Log In")).toBeInTheDocument();
     expect(screen.getByTestId("email-label")).toBeInTheDocument();
     expect(screen.getByTestId("email-input")).toBeInTheDocument();
     expect(screen.getByTestId("password-label")).toBeInTheDocument();
