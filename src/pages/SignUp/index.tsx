@@ -15,7 +15,7 @@ import Snackbar from "@mui/material/Snackbar";
 const SignUpPage = () => {
   const nav = useNavigate();
   const [slot, setSlot] = useState<React.ReactNode>(null);
-  const [showToast, setShowToast] = useState(true);
+  const [showToast, setShowToast] = useState(false);
 
   const handleSignUp = (email: string, password: string) =>
     signup(email, password)
