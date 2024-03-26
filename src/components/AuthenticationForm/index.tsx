@@ -128,7 +128,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
       <div className={styles.buttonContainer}>
         <Button
           className={styles.button}
-          data-testid="button"
+          data-testid="auth-submit-button"
           variant="contained"
           type="submit"
           disabled={email === "" || password === ""}

@@ -19,7 +19,7 @@ describe("AuthenticationForm", () => {
     expect(screen.getByTestId("password-input")).toBeInTheDocument();
     expect(screen.getByTestId("redirect-label")).toBeInTheDocument();
     expect(screen.getByTestId("password-visibility-button")).toBeInTheDocument();
-    expect(screen.getByTestId("button")).toBeInTheDocument();
+    expect(screen.getByTestId("auth-submit-button")).toBeInTheDocument();
   });
 
   test("updates email and password fields correctly", () => {
@@ -63,7 +63,7 @@ describe("AuthenticationForm", () => {
 
     const emailInput = screen.getByTestId("email-input") as HTMLInputElement;
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
-    const button = screen.getByTestId("button");
+    const button = screen.getByTestId("auth-submit-button");
 
     // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
@@ -91,7 +91,7 @@ describe("AuthenticationForm", () => {
         handelSubmit={handelSubmit}
       />,
     );
-    const button = screen.getByTestId("button");
+    const button = screen.getByTestId("auth-submit-button");
     const emailInput = screen.getByLabelText("Email");
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
 
@@ -114,7 +114,7 @@ describe("AuthenticationForm", () => {
       />,
     );
 
-    const button = screen.getByTestId("button");
+    const button = screen.getByTestId("auth-submit-button");
     const emailInput = screen.getByLabelText("Email");
     const passwordInput = screen.getByTestId("password-input") as HTMLInputElement;
 

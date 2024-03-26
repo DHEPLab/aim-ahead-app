@@ -11,7 +11,8 @@
     "prepare": "husky || true",
     "prettier": "prettier src --write",
     "start": "react-scripts start",
-    "test": "react-scripts test  --transformIgnorePatterns \"node_modules/(?!axios)/\""
+    "test": "react-scripts test",
+    "e2e": "cypress open"
   },
   "lint-staged": {
     "src/**/*.{js,ts,jsx,tsx}": [
@@ -81,5 +82,8 @@
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-recommended-scss": "^14.0.0",
     "stylelint-config-standard-scss": "^13.0.0"
+  },  
+  "jest": {
+    "transformIgnorePatterns": ["node_modules\/(?!axios)"]
   }
 }

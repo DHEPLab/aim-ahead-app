@@ -1,0 +1,7 @@
+{
+    "data": null,
+    "error": {
+      "code": "1003",
+      "message": "Email is already sign up, please login."
+    }
+}
