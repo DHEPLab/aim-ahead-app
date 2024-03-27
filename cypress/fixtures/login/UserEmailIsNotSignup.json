@@ -1,0 +1,7 @@
+{
+    "data": null,
+    "error": {
+      "code": "1004",
+      "message": "Email hasn’t sign up, please sign up."
+    }
+}
