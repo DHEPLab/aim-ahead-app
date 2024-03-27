@@ -20,32 +20,15 @@ export const getUserName = () => {
 };
 
 export const signup = (email: string, password: string): Promise<AxiosResponse<string>> => {
-  return instance
-    .post("/auth/signup", {
-      email,
-      password,
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      return Promise.reject(error);
-    });
+  return instance.post("/auth/signup", {
+    email,
+    password,
+  });
 };
 
 export const login = (email: string, password: string): Promise<AxiosResponse<string>> => {
-  return instance
-    .post("/auth/login", {
-      email,
-      password,
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      if (error.code === "ERR_BAD_RESPONSE") {
-        error.message = "There is an unexpected error. Please check your internet and try again.";
-      }
-      return Promise.reject(error);
-    });
+  return instance.post("/auth/login", {
+    email,
+    password,
+  });
 };
