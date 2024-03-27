@@ -8,6 +8,7 @@ import { login } from "../../services/useUserService";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/aim_ahead_logo.jpg";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import path from "../../routes/path";
 
 const LoginPage = () => {
   const nav = useNavigate();
@@ -17,7 +18,7 @@ const LoginPage = () => {
   const handleLogin = (email: string, password: string) =>
     login(email, password)
       .then(() => {
-        nav("/");
+        nav(path.root);
       })
       .catch((error) => {
         setSlot(
@@ -28,7 +29,7 @@ const LoginPage = () => {
         );
       });
 
-  const handleFormchange = () => {
+  const handleFormChange = () => {
     setSlot(null);
   };
 
@@ -45,7 +46,7 @@ const LoginPage = () => {
         </div>
         <AuthenticationForm
           slot={slot}
-          onChange={handleFormchange}
+          onChange={handleFormChange}
           pageType={FormType.Login}
           handelSubmit={handleLogin}
           passwordRegex={passwordRegex}

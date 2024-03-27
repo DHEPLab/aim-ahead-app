@@ -3,6 +3,7 @@ import { Button, CircularProgress, FormControl, IconButton, InputAdornment, Outl
 
 import styles from "./index.module.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import path from "../../routes/path";
 
 interface AuthenticationFormProps {
   pageType: FormType;
@@ -143,7 +144,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
         <a
           className={styles.redirectText}
           data-testid="redirect-label"
-          href={pageType === FormType.SignUp ? "/login" : "/signup"}
+          href={pageType === FormType.SignUp ? path.login : path.signup}
         >
           {isSignUpPage ? "Log In" : "Sign Up"}
         </a>

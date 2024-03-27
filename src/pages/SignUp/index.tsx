@@ -21,9 +21,6 @@ const SignUpPage = () => {
     signup(email, password)
       .then(() => {
         setShowToast(true);
-        setTimeout(function () {
-          nav(path.login);
-        }, 2000);
       })
       .catch((error) => {
         setSlot(
@@ -34,8 +31,13 @@ const SignUpPage = () => {
         );
       });
 
-  const handleFormchange = () => {
+  const handleFormChange = () => {
     setSlot(null);
+  };
+
+  const handelToastOnClose = () => {
+    setShowToast(false);
+    nav(path.login);
   };
 
   return (
@@ -51,7 +53,7 @@ const SignUpPage = () => {
         </div>
         <AuthenticationForm
           slot={slot}
-          onChange={handleFormchange}
+          onChange={handleFormChange}
           pageType={FormType.SignUp}
           handelSubmit={handleSignUp}
           passwordRegex={passwordPattern}
@@ -59,8 +61,8 @@ const SignUpPage = () => {
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={showToast}
-          onClose={() => setShowToast(false)}
-          autoHideDuration={3000}
+          onClose={handelToastOnClose}
+          autoHideDuration={2000}
           message="Sign up completed! Please log in."
         />
       </div>
