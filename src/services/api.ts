@@ -3,11 +3,11 @@ import axios from "axios";
 
 const baseUrl = "/api";
 const tokenKey = "token";
-const storeToken = (token: string) => {
+export const storeToken = (token: string) => {
   localStorage.setItem(tokenKey, token);
 };
 
-const getToken = () => {
+export const getToken = () => {
   return localStorage.getItem(tokenKey) || "";
 };
 

@@ -39,7 +39,10 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "testing-library/prefer-screen-queries": "off"
+    }
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

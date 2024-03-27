@@ -7,14 +7,17 @@ import ExampleUserPage from "../pages/ExampleUserPage";
 import LoginPage from "../pages/Login";
 import SignUpPage from "../pages/SignUp";
 import AppLayout from "../components/AppLayout";
+import withCredencial from "../components/withCredencial";
+
+const AuthedAppLayout = withCredencial(AppLayout);
 
 const routes: RouteObject[] = [
   {
     path: path.root,
     element: (
-      <AppLayout>
+      <AuthedAppLayout>
         <Outlet />
-      </AppLayout>
+      </AuthedAppLayout>
     ),
     children: [
       {
