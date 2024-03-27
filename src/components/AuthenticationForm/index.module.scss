@@ -15,19 +15,16 @@
     .emailInput {
       border-radius: 8px;
       color: #676A6A;
-      font-family: Lato, serif;
     }
 
     .passwordInput {
       border-radius: 8px;
       color: #676A6A;
-      font-family: Lato, serif;
     }
 
     .invalidEmailText {
       margin: 10px 0;
       color: red;
-      font-family: Lato, serif;
       font-size: 16px;
       height: 20px;
     }
@@ -36,7 +33,6 @@
   .passwordRuleText {
     margin-top: 10px;
     color: #6e6d6d;
-    font-family: Lato, serif;
     font-size: 16px;
     height: 40px;
   }
@@ -44,7 +40,6 @@
   .invalidPasswordText {
     margin-top: 10px;
     color: red;
-    font-family: Lato, serif;
     font-size: 16px;
     height: 40px;
   }
@@ -57,7 +52,6 @@
 
     .redirectHintText {
       font-size: 18px;
-      font-family: Lato, serif;
     }
 
     .redirectText {
@@ -65,7 +59,6 @@
       font-size: 18px;
       text-decoration: none;
       color: #1793bd;
-      font-family: Lato, serif;
     }
   }
 
@@ -82,7 +75,6 @@
       border-radius: 6px;
       background: #8fd9a9;
       color: #303230;
-      font-family: Lato, serif;
       font-weight: 500;
       text-transform: none;
     }
