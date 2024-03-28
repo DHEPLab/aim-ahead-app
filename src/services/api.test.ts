@@ -51,7 +51,7 @@ describe("API Tests", () => {
 
   test("Token is stored on receiving new token", async () => {
     const newToken = "newToken";
-    mock.onGet("/api/users").reply(200, {}, { Authorization: `Bearer ${newToken}` });
+    mock.onGet("/api/users").reply(200, {}, { authorization: `Bearer ${newToken}` });
 
     await instance.get("/api/users");
     expect(localStorage.getItem("token")).toEqual(newToken);
@@ -61,10 +61,8 @@ describe("API Tests", () => {
     const url = "/api/nonexistent";
     try {
       await instance.get(url);
-    } catch (error) {
-      // @ts-ignore
-      // eslint-disable-next-line jest/no-conditional-expect
-      expect(error.message).toEqual("Request failed with status code 404");
+    } catch ({ message }) {
+      expect(message).toEqual("Request failed with status code 404");
     }
   });
 });
