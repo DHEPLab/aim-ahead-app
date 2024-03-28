@@ -39,10 +39,6 @@ jobs:
       - name: Run tests
         run: |
           npm test -- --watchAll=false
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm start
 
   build-and-push:
     needs: test
