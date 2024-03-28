@@ -5,3 +5,4 @@ cypress.config.ts
 
 .prettier*
 .stylelint*
+.eslintrc*
