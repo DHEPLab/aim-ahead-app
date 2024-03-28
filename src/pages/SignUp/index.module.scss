@@ -1,6 +1,4 @@
 .app {
-  background-color: #f4f4f4;
-  height: 100%;
   display: flex;
   flex-direction: column;
 
@@ -26,9 +24,10 @@
     }
 
     .subtitle {
-      width: 400px;
+      width: 80%;
       font-size: 17px;
       color: #6e6d6d;
+      align-self: center;
     }
   }
 }

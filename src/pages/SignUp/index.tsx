@@ -41,7 +41,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout style={{ backgroundColor: "#f4f4f4" }}>
       <div className={styles.app}>
         <div className={styles.titleContainer}>
           <img src={logo} className={styles.appLogo} alt="logo" />
