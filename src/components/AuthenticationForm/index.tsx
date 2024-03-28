@@ -46,7 +46,9 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
       setSubmitLoading(true);
       try {
         await handelSubmit(email, password);
-      } catch (e) {}
+      } catch (e) {
+        console.error("An error occurred:", e);
+      }
       setSubmitLoading(false);
     }
   };
@@ -86,6 +88,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
           sx={isEmailValid ? { marginBottom: "20px" } : {}}
           onChange={handleEmailChange}
           placeholder="Enter Email"
+          autoComplete="email"
         />
         {!isEmailValid && (
           <span className={styles.invalidEmailText}>Invalid email address. Please correct and try again.</span>
@@ -105,6 +108,7 @@ const AuthenticationForm = ({ pageType, passwordRegex, handelSubmit, slot, onCha
           required
           className={styles.passwordInput}
           placeholder="Enter Password"
+          autoComplete="current-password"
           endAdornment={
             <InputAdornment position="end">
               <IconButton
