@@ -5,9 +5,7 @@ import DensityMediumIcon from "@mui/icons-material/DensityMedium";
 import avatar from "../../../assets/images/defalt_avatar.jpg";
 import styles from "./index.module.scss";
 
-export type HeaderProps = {};
-
-const Header: React.FC = (props: HeaderProps) => {
+const Header: React.FC = () => {
   return (
     <div className={styles.header}>
       <div>Collective Goods</div>
